@@ -1,0 +1,163 @@
+<!-- <div class="landing-page">
+  <div class="login-section">
+    <mat-card>
+      <mat-card-title class="text-center">Login</mat-card-title>
+      <form class="example-form">
+        <mat-form-field class="example-full-width">
+          <input matInput placeholder="Favorite food" value="Sushi">
+        </mat-form-field>
+
+        <mat-form-field class="example-full-width">
+          <textarea matInput placeholder="Leave a comment"></textarea>
+        </mat-form-field>
+      </form>
+    </mat-card>
+  </div>
+
+</div> -->
+
+<form class="form-horizontal" [formGroup]="form">
+
+  <div class="form-group" [ngClass]="displayFieldCss('name')">
+    <div class="col-sm-12">
+      <label for="name" class="control-label required">Name</label>
+      <input type="text" id="name" class="form-control" formControlName="name">
+      <app-field-error-display [displayError]="isFieldValid('name')" errorMsg="Please inform your name">
+      </app-field-error-display>
+    </div>
+  </div>
+
+  <div class="form-group" [ngClass]="displayFieldCss('email')">
+    <div class="col-sm-12">
+      <label for="email" class="control-label required">Email</label>
+      <input type="text" id="email" class="form-control" formControlName="email">
+      <app-field-error-display [displayError]="isFieldValid('email')" errorMsg="Please inform your email">
+      </app-field-error-display>
+    </div>
+  </div>
+
+  <div formGroupName="address">
+
+    <div class="form-group">
+
+      <div class="col-md-6" [ngClass]="displayFieldCss('address.street')">
+        <label for="street" class="control-label required">Address</label>
+        <input type="text" id="street" class="form-control" formControlName="street">
+        <app-field-error-display [displayError]="isFieldValid('address.street')" errorMsg="Please inform your address">
+        </app-field-error-display>
+      </div>
+
+      <div class="col-md-3">
+        <label for="street2" class="control-label">Address 2</label>
+        <input type="text" id="street2" class="form-control" formControlName="street2">
+      </div>
+
+      <div class="col-md-3" [ngClass]="displayFieldCss('address.zipCode')">
+        <label for="zipCode" class="control-label required">Zip Code</label>
+        <input type="text" id="zipCode" class="form-control" formControlName="zipCode">
+        <app-field-error-display [displayError]="isFieldValid('address.zipCode')" errorMsg="Please inform your zipCode">
+        </app-field-error-display>
+      </div>
+
+    </div>
+
+    <div class="form-group">
+
+      <div class="col-md-4" [ngClass]="displayFieldCss('address.city')">
+        <label for="city" class="control-label required">City</label>
+        <input type="text" id="city" class="form-control" formControlName="city">
+        <app-field-error-display [displayError]="isFieldValid('address.city')" errorMsg="Please inform your city">
+        </app-field-error-display>
+      </div>
+
+      <div class="col-md-4" [ngClass]="displayFieldCss('address.state')">
+        <label for="state" class="control-label required">State / Province / Region</label>
+        <input type="text" id="state" class="form-control" formControlName="state">
+        <app-field-error-display [displayError]="isFieldValid('address.state')" errorMsg="Please inform your state">
+        </app-field-error-display>
+      </div>
+
+      <div class="col-md-4" [ngClass]="displayFieldCss('address.country')">
+        <label for="country" class="control-label required">Country</label>
+        <input type="text" id="country" class="form-control" formControlName="country">
+        <app-field-error-display [displayError]="isFieldValid('address.country')" errorMsg="Please inform your country">
+        </app-field-error-display>
+      </div>
+
+    </div>
+  </div>
+
+  <button class="btn btn-primary" (click)="onSubmit()">Submit</button>
+  <button class="btn" (click)="reset()">Reset</button>
+
+</form>
+
+<!-- <p>
+
+  <a routerLink = "/data">Go to Data Page</a>
+  <a routerLink = "/login">Login</a>
+  <a routerLink = "/register">Register</a>
+  <a routerLink = "/dashboard">Dashboard</a>
+
+</p> -->
+
+<!-- Pipes -->
+<!-- <div>
+  <p>Hello world ! somebody owes me {{amount | currency: format}}</p>
+
+  <button (click)="toggleINRandUSD()">Toggle</button>
+</div>
+
+<div>
+  <p>This is Normal test</p>
+  <p>{{"This is Pipe Test" | first:false:"doublequotes"}}</p>
+</div> -->
+
+<!-- ngIf -->
+
+<!-- type1 -->
+<!-- <div *ngIf="type1">Yes</div> -->
+
+<!-- type2 -->
+<!-- <div *ngIf="type2; else falseBlock">Yes</div>
+
+<ng-template #falseBlock>
+  <h1>No</h1>
+</ng-template> -->
+
+<!-- type 3 -->
+<!-- <div *ngIf="type3; then trueBlock else thenBlock">Yes</div>
+
+<ng-template #trueBlock>
+    <h1>Yes</h1>
+  </ng-template>
+
+
+<ng-template #thenBlock>
+  <h1>No</h1>
+</ng-template> -->
+
+
+<!-- ngNonBindable -->
+<!-- It is used to use curly braces in html without binding -->
+
+<!-- <p>ngNonBindable is used to use curly braces in html i.e., like this, <span ngNonBindable>{{name}}</span></p> -->
+
+
+<!-- ngFor and ngClass -->
+<!-- <ul>
+  <li *ngFor="let info of data">
+      <span [ngClass]="{
+        'swift':info.lang === 'Swift',
+        'javascript':info.lang === 'Javascript'
+      }">{{info.lang}} is mostly used on {{info.usedOn}}</span>
+  </li>
+</ul> -->
+
+
+<!-- Custom Directives -->
+
+<!-- <div>
+  <p>This is Normal Text</p>
+  <p appRedBlack>This is Text with Custom Directive</p>
+</div> -->

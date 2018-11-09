@@ -1,0 +1,19 @@
+ .even{
+    background: black;
+    color:white;
+}
+ .odd{
+    background: red;
+    color:white;
+}
+
+.first{
+    font-weight: bold;
+}
+.last{
+    font-weight: bold;
+}
+
+html {
+    height: 100%
+}

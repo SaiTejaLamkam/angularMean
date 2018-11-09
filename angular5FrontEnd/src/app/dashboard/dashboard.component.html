@@ -1,0 +1,18 @@
+
+
+<div>
+  {{quote}} by {{email}} <a routerLink = "/logout">logout</a>
+  <div id="controls">
+    <input type="text" value="{{quote}}" id="myQuote">
+    <input type="button" (click)="updateQuote($event)" value="Update Quote">
+  </div>
+</div>
+
+<div>
+  <input [(ngModel)]="message" />
+<button (click)="sendMessage()">Send</button>
+</div>
+
+<div *ngFor="let message of messages">
+  {{message}}
+</div>

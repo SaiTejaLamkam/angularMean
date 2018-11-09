@@ -1,0 +1,16 @@
+.idea
+node_modules
+*.log*
+.DS_Store
+dist
+*.zip
+settings.json
+*.orig
+*.bak
+*.LOCAL
+*.BASE
+*.REMOTE
+launch.json
+.vs
+yarn.lock
+.eslintrc.js
