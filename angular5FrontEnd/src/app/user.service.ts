@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs/Rx';
+// import { Observable } from 'rxjs';
 import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
 
 interface dbData {
   email: string,
@@ -44,7 +45,7 @@ export class UserService {
   }
 
   updateState(obj) {
-    return this.store.select('appReducer').dispatch({
+    return this.store.dispatch({
       type: obj.action,
       payload: obj.payload
     });
