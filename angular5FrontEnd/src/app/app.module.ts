@@ -110,8 +110,8 @@ import { NgSelectModule } from '@ng-select/ng-select';
     AuthService,
     UserService,
     AuthGuard,
-    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
-    ChatService
+    ChatService,
+    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true }
   ],
   bootstrap: [AppComponent],
   entryComponents: [ProfilePopupComponent],

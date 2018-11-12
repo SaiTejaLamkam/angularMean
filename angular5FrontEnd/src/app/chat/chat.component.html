@@ -11,6 +11,11 @@
   </header>
 
   <div class="chat">
+      <div class="search-users">
+            <ng-select [items]="manufacurersList$ | async" bindLabel="name" [addTag]="true" [hideSelected]="true" [typeahead]="manufacurersListinput$"
+            [(ngModel)]="selectedManufacturer">
+          </ng-select>
+      </div>
 
       <div class="chat-history">
 

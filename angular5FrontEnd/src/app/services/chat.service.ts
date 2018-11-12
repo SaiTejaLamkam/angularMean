@@ -1,11 +1,15 @@
 import * as io from 'socket.io-client';
+import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
-
+@Injectable()
 export class ChatService {
     private url = 'http://localhost:1234';
     private socket;
 
-    constructor() {
+    constructor(
+        private http: HttpClient
+    ) {
         this.socket = io(this.url);
     }
 
@@ -20,5 +24,9 @@ export class ChatService {
               observer.next(message);
           });
       });
+  }
+
+  searchUser(payload) {
+    return this.http.post('/api/user/searchUser', payload);
   }
 }
