@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { Observable, of as observableOf } from 'rxjs';
 interface authResponse {
   success: boolean,
   message: any,
@@ -8,7 +9,8 @@ interface authResponse {
 
 interface regResponse {
   success: boolean,
-  message: string
+  message: string,
+  data: any
 }
 @Injectable()
 export class AuthService {
@@ -20,7 +22,8 @@ export class AuthService {
   }
 
   get isLoggedIn() {
-    return this.loggedInStatus;
+    // return this.loggedInStatus;
+    return observableOf(this.loggedInStatus);
   }
 
   login(email, password) {
@@ -33,6 +36,12 @@ export class AuthService {
 
   registerDetails(obj) {
     return this.http.post<regResponse>('/api/auth/register', {
+    ...obj
+    });
+  }
+
+  updateUserDetails(obj) {
+    return this.http.post<regResponse>('/api/auth/updateUserDetails', {
     ...obj
     });
   }

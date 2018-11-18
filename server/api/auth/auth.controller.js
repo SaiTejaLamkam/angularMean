@@ -38,7 +38,6 @@ exports.userLogin = async function (req, res) {
 };
 
 exports.userRegister = async function (req, res) {
-	console.log(req.body, '----');
 	const { username, email, password } = req.body;
 	const paswdHash = await bcrypt.hash(password, 10);
 	if(paswdHash){
@@ -74,8 +73,7 @@ exports.userRegister = async function (req, res) {
 
 
 exports.loggedUserData = async function (req, res) {
-	const user = await User.findOne({ email: req.session.user })
-	console.log(user, '********');
+	const user = await User.findOne({ email: req.session.user }, { password: 0 })
 	if (!user) {
 		res.json({
 			status: false,
@@ -83,15 +81,7 @@ exports.loggedUserData = async function (req, res) {
 		})
 		return
 	}
-
-	res.json({
-		status: true,
-		email: req.session.user,
-		quote : user.quote,
-		profilePic: user.profilePic,
-		userName: user.userName,
-		userId: user._id
-	})
+	res.json(user)
 }
 
 
@@ -123,4 +113,31 @@ exports.updateUserQuote = async function (req, res) {
 	res.json({
 		success: true
 	})
+}
+
+exports.updateUserDetails = async function (req, res) {
+	console.log(req.body, '---------');
+	const user = await User.findOne({ _id: req.body._id })
+	if (!user) {
+		res.json({
+			success: false,
+			message: 'No User'
+		})
+		return
+	}
+
+	const updateDetails = await User.update({ _id: req.body._id }, { $set: req.body });
+	if(updateDetails) {
+		const object2 = Object.assign(user,req.body);
+		res.status(200).send({success: true, data: object2});
+	}else{
+		res.json({
+			success: false,
+			message: 'Update Failed'
+		})
+	}
+	
+	// res.json({
+	// 	success: true
+	// })
 }

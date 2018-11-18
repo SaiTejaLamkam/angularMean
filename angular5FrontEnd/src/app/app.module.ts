@@ -44,6 +44,7 @@ import {ProfilePopupComponent} from './popups/profile-popup/profile-popup.compon
 import { ChatService } from './services/chat.service';
 import { ChatComponent } from './chat/chat.component';
 import { NgSelectModule } from '@ng-select/ng-select';
+import { ToastrModule } from 'ngx-toastr';
 @NgModule({
   declarations: [
     AppComponent,
@@ -100,10 +101,11 @@ import { NgSelectModule } from '@ng-select/ng-select';
     FormsModule,
     ReactiveFormsModule,
     MatDialogModule,
-    NgSelectModule
+    NgSelectModule,
     // HttpClientInMemoryWebApiModule.forRoot(
     //   InMemoryDataService, { dataEncapsulation: false }
     // )
+    ToastrModule.forRoot(),
   ],
   providers: [
     DemoServiceService,

@@ -11,4 +11,5 @@ router.get('/loggedUserData',VerifyToken, controller.loggedUserData);
 router.get('/isLoggedIn',VerifyToken, controller.isLoggedIn);
 router.get('/logout',VerifyToken, controller.logout);
 router.post('/updateUserQuote',VerifyToken, controller.updateUserQuote);
+router.post('/updateUserDetails',VerifyToken, controller.updateUserDetails);
 module.exports = router;
