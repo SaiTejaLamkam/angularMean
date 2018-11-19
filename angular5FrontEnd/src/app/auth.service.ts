@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable, of as observableOf } from 'rxjs';
+import { Observable, of as observableOf, Subject, BehaviorSubject } from 'rxjs';
+// import * as Rx from 'rxjs';
+
 interface authResponse {
   success: boolean,
   message: any,
@@ -15,15 +17,27 @@ interface regResponse {
 @Injectable()
 export class AuthService {
   private loggedInStatus = false;
+  banners$: Subject<any> = new BehaviorSubject<boolean>(null);
+
+// setBanners(banners: any[]): void {
+//     this.banners$.next(banners);
+// }
+  // observable = Observable.create((observer) => {
+  //   console.log(this.loggedInStatus,'33333333333333');
+  //   observer.next(this.loggedInStatus);
+  // });
+
   constructor(private http: HttpClient) { }
 
   setLoggedIn(value: boolean) {
     this.loggedInStatus = value;
+    this.banners$.next(this.loggedInStatus);
   }
 
   get isLoggedIn() {
-    // return this.loggedInStatus;
-    return observableOf(this.loggedInStatus);
+    // this.banners$.next(this.loggedInStatus);
+    return this.loggedInStatus;
+    // return observableOf(this.loggedInStatus);
   }
 
   login(email, password) {

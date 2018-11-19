@@ -4,6 +4,8 @@ import { Router } from '@angular/router';
 import { UserService } from '../user.service';
 import { ACTION_LOGIN } from '../store/actions/appActions';
 import * as $ from 'jquery';
+import { Subject } from 'rxjs';
+// import * as Rx from 'rxjs';
 
 @Component({
   selector: 'app-register',
@@ -11,11 +13,12 @@ import * as $ from 'jquery';
   styleUrls: ['./register.component.scss']
 })
 export class RegisterComponent implements OnInit {
-
+// public subject;
+public subject = new Subject();
   constructor(
     private Auth: AuthService,
     private router: Router,
-    private user: UserService) { }
+    private user: UserService) {}
 
   ngOnInit() {
     $(function() {
@@ -34,6 +37,13 @@ export class RegisterComponent implements OnInit {
       e.preventDefault();
     });
   });
+
+//   this.subject.subscribe((data) => {
+//     console.log(data, '++++++++++++'); // 0.24957144215097515 (random number)
+// });
+
+  // this.Auth.observable.subscribe(this.subject);
+
   }
 
 
@@ -78,7 +88,6 @@ export class RegisterComponent implements OnInit {
         this.router.navigate(['dashboard']);
         this.Auth.setLoggedIn(true);
         localStorage.setItem('currentUser', JSON.stringify(data));
-        // this.user.updateState({action: ACTION_LOGIN, payload: username});
       } else {
         window.alert(data.message);
       }
