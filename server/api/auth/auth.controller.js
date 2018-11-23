@@ -53,7 +53,8 @@ exports.userRegister = async function (req, res) {
 			const user = new User({
 				userName: username,
 				email: email,
-				password:paswdHash
+				password:paswdHash,
+				name: username
 			})
 			const resp = await user.save()
 			res.json({
@@ -116,7 +117,7 @@ exports.updateUserQuote = async function (req, res) {
 }
 
 exports.updateUserDetails = async function (req, res) {
-	console.log(req.body, '---------');
+	
 	const user = await User.findOne({ _id: req.body._id })
 	if (!user) {
 		res.json({
@@ -126,6 +127,14 @@ exports.updateUserDetails = async function (req, res) {
 		return
 	}
 
+	if(req.body.firstName && req.body.lastName) {
+		req.body.name = req.body.firstName + ' '+req.body.lastName;
+	}else if(req.body.firstName && !req.body.lastName) {
+		req.body.name = req.body.firstName;
+	}else{
+		req.body.name = req.body.userName;
+	}
+	console.log(req.body, '---------');
 	const updateDetails = await User.update({ _id: req.body._id }, { $set: req.body });
 	if(updateDetails) {
 		const object2 = Object.assign(user,req.body);

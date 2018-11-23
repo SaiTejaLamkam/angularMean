@@ -36,7 +36,9 @@ import {
   MatSortModule,
   MatInputModule,
   MatFormFieldModule,
-  MatDialogModule
+  MatDialogModule,
+  MatAutocompleteModule,
+  MatProgressSpinnerModule
 } from '@angular/material';
 import { FieldErrorDisplayComponent } from './field-error-display/field-error-display.component';
 import { JwtInterceptor } from './_helpers';
@@ -45,6 +47,7 @@ import { ChatService } from './services/chat.service';
 import { ChatComponent } from './chat/chat.component';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { ToastrModule } from 'ngx-toastr';
+import { ConfirmationPopupComponent } from './popups/confirmation-popup/confirmation-popup.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -57,7 +60,8 @@ import { ToastrModule } from 'ngx-toastr';
     MyNavComponent,
     FieldErrorDisplayComponent,
     ProfilePopupComponent,
-    ChatComponent
+    ChatComponent,
+    ConfirmationPopupComponent
   ],
   imports: [
     BrowserModule,
@@ -102,6 +106,8 @@ import { ToastrModule } from 'ngx-toastr';
     ReactiveFormsModule,
     MatDialogModule,
     NgSelectModule,
+    MatAutocompleteModule,
+    MatProgressSpinnerModule,
     // HttpClientInMemoryWebApiModule.forRoot(
     //   InMemoryDataService, { dataEncapsulation: false }
     // )
@@ -116,7 +122,7 @@ import { ToastrModule } from 'ngx-toastr';
     { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true }
   ],
   bootstrap: [AppComponent],
-  entryComponents: [ProfilePopupComponent],
+  entryComponents: [ProfilePopupComponent, ConfirmationPopupComponent],
 })
 export class AppModule implements OnInit {
   ngOnInit() {

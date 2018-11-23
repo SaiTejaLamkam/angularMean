@@ -1,10 +1,11 @@
-<div id="live-chat">
+<div id="live-chat" class="chat-box">
 
-  <header class="clearfix">
+  <header class="clearfix chat-header">
 
       <a class="chat-close">x</a>
 
-      <h4>John Doe</h4>
+      <h4 class="user-name" *ngIf="userData.name">{{userData.name}}</h4>
+      <h4 class="user-name" *ngIf="!userData.name">{{userData.userName}}</h4>
 
       <span class="chat-message-counter">3</span>
 
@@ -12,9 +13,42 @@
 
   <div class="chat">
       <div class="search-users">
-            <ng-select [items]="manufacurersList$ | async" bindLabel="name" [addTag]="true" [hideSelected]="true" [typeahead]="manufacurersListinput$"
-            [(ngModel)]="selectedManufacturer">
-          </ng-select>
+            <!-- <ng-select [items]="manufacurersList$ | async" bindLabel="name" [hideSelected]="true" [typeahead]="manufacurersListinput$"
+            [(ngModel)]="selectedManufacturer" (change)="onSelectUser()">
+          </ng-select> -->
+          <!-- <ng-select [items]="manufacurersList$ | async" [(ngModel)]="selectedManufacturer" bindLabel="name" [hideSelected]="true" [typeahead]="manufacurersListinput$" >
+            <ng-template ng-option-tmp let-item="item" let-index="index" let-search="searchTerm">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title" [ngOptionHighlight]="search">{{item.name}}</h5>
+                        <h6 class="card-subtitle mb-2 text-muted">{{item.email}}</h6>
+                        <div>
+                            <a class="card-link" (click)="onSelectUser()">Send Request</a>
+                        </div>
+                    </div>
+                </div>
+            </ng-template>
+        </ng-select> -->
+
+        <form class="example-form" [formGroup]='usersForm'>
+          <!-- <mat-form-field class="example-full-width">
+            <input matInput placeholder="Choose a user" [matAutocomplete]="auto" formControlName='userInput'>
+          </mat-form-field> -->
+          <input placeholder="Choose a user" [matAutocomplete]="auto" formControlName='userInput' type="text" class="ais-SearchBox-input" placeholder="Search a product">
+          <!-- <span>Your choice is: {{usersForm.get('userInput').value | json}}</span> -->
+
+          <mat-autocomplete (optionSelected)="onSelectUser($event)" #auto="matAutocomplete" [displayWith]="displayFn">
+            <mat-option *ngIf="isLoading" class="is-loading"><mat-spinner diameter="50"></mat-spinner></mat-option>
+            <ng-container *ngIf="!isLoading">
+              <mat-option *ngFor="let user of filteredUsers" [value]="user">
+                <span>{{ user.name }}</span>
+                <small> | {{user.email}}</small>
+                <mat-divider></mat-divider>
+              </mat-option>
+            </ng-container>
+          </mat-autocomplete>
+        </form>
+
       </div>
 
       <div class="chat-history">
