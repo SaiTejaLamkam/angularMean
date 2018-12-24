@@ -32,6 +32,7 @@ export class ChatComponent implements OnInit {
   filteredUsers = [];
   usersForm: FormGroup;
   isLoading = false;
+  selectedFriend: any;
   constructor(
     private chatService: ChatService,
     private store: Store<any>,
@@ -118,14 +119,27 @@ export class ChatComponent implements OnInit {
   // }
 
   onSelectUser(event) {
-    console.log(event.option.value, this.usersForm.get('userInput').value, '===================');
     const modalData = event.option.value;
+    this.selectedFriend = event.option.value;
     modalData.type = 'friendRequestConfirmation';
     const dialogRef = this.dialog.open(ConfirmationPopupComponent, {
       disableClose: true,
       // width: '250px',
       // position: {top: '30px', right: '10px'}
       data: modalData
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(this.selectedFriend, this.userData, '=========');
+      if (result === true) {
+        const payload = {
+          friendObj: this.selectedFriend,
+          userObj: this.userData
+        };
+        this.chatService.sendRequest(payload).subscribe(response => {
+          console.log(response, '++++++++++');
+        });
+      }
     });
   }
 }

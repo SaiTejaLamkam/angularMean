@@ -27,4 +27,8 @@ public modalData: any;
     };
   }
 
+  accept() {
+    this.dialogRef.close(true);
+  }
+
 }

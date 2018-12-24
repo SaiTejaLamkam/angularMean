@@ -29,4 +29,8 @@ export class ChatService {
   searchUser(payload) {
     return this.http.post('/api/user/searchUser', payload);
   }
+
+  sendRequest(payload) {
+    return this.http.post('/api/userFriends/sendFriendRequest', payload);
+  }
 }
